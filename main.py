@@ -1,6 +1,6 @@
 import os
 
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageFilter
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import *
 
@@ -43,9 +43,26 @@ class PhotoManger:
         self.filename = None
 
 
+
+
+
+
+
+
+
+
+
+
+
     def load(self):
         image_path = os.path.join(self.folder, self.filename)
         self.photo = Image.open(image_path)
+
+
+
+
+
+
 
 
     def show_image(self, image_lbl):
@@ -57,6 +74,63 @@ class PhotoManger:
 
 
 
+    def bw(self):
+        self.photo = self.photo.convert("L")
+        self.show_image(self.image_lbl)
+
+
+
+
+
+    def nas(self):
+        self.photo = ImageEnhance.Color(self.photo).enhance(1.5)
+        self.show_image(self.image_lbl)
+
+
+
+
+    def blur(self):
+        self.photo = self.photo.filter(ImageFilter.BLUR)
+        self.show_image(self.image_lbl)
+
+
+
+
+    def contur(self):
+        self.photo = self.photo.filter(ImageFilter.CONTOUR)
+        self.show_image(self.image_lbl)
+
+
+
+
+    def emboss(self):
+        self.photo = self.photo.filter(ImageFilter.EMBOSS )
+        self.show_image(self.image_lbl)
+
+
+
+
+    def sharpen(self):
+        self.photo = self.photo.filter(ImageFilter.SHARPEN)
+        self.show_image(self.image_lbl)
+
+
+
+
+
+
+    def flip(self):
+        self.photo = self.photo.transpose(Image.FLIP_LEFT_RIGHT)
+        self.show_image(self.image_lbl)
+
+
+
+
+
+
+    def rotate(self):
+        self.photo = self.photo.transpose(Image.ROTATE_90)
+        self.show_image(self.image_lbl)
 
 
 
@@ -66,11 +140,22 @@ class PhotoManger:
 
 
 
-filter1 = QPushButton("фільтер1")
-filter2 = QPushButton("фільтер2")
-filter3 = QPushButton("фільтер3")
-filter4 = QPushButton("фільтер4")
-filter5 = QPushButton("фільтер5")
+
+
+
+
+
+
+
+
+filter1 = QPushButton("ч/б")
+filter2 = QPushButton("Насичиність")
+filter3 = QPushButton("розмилювання")
+filter4 = QPushButton("контур")
+filter5 = QPushButton("тиснення")
+filter6 = QPushButton("Збільшення різкост")
+filter7 = QPushButton("Віддзеркалення")
+filter8 = QPushButton("Поворот")
 
 main_line = QHBoxLayout()
 
@@ -86,6 +171,9 @@ v2.addWidget(filter2)
 v2.addWidget(filter3)
 v2.addWidget(filter4)
 v2.addWidget(filter5)
+v2.addWidget(filter6)
+v2.addWidget(filter7)
+v2.addWidget(filter8)
 v3.addLayout(v2)
 
 
@@ -95,7 +183,7 @@ main_line.addLayout(v3)
 
 
 photo_manager = PhotoManger()
-
+photo_manager.image_lbl = image_lbl
 
 
 def open_folder():
@@ -107,9 +195,9 @@ def open_folder():
 
     for i in files:
 
-    if i,endswith("png"):
-        images_list.addItems((i))
-    images_list.addItems(files)
+        if i.endswith("png"):
+            images_list.addItem(i)
+    #images_list.addItems(files)
 
 
 
@@ -124,18 +212,21 @@ def show_chosen_image():
 
 images_list.currentRowChanged.connect(show_chosen_image)
 
+filter1.clicked.connect(photo_manager.bw)
 
+filter2.clicked.connect(photo_manager.nas)
 
+filter3.clicked.connect(photo_manager.blur)
 
+filter4.clicked.connect(photo_manager.contur)
 
+filter5.clicked.connect(photo_manager.emboss)
 
+filter6.clicked.connect(photo_manager.sharpen)
 
+filter7.clicked.connect(photo_manager.flip)
 
-
-
-
-
-
+filter8.clicked.connect(photo_manager.rotate)
 
 
 
