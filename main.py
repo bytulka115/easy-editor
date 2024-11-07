@@ -70,9 +70,26 @@ class PhotoManger:
         self.filename = None
 
 
+
+
+
+
+
+
+
+
+
+
+
     def load(self):
         image_path = os.path.join(self.folder, self.filename)
         self.photo = Image.open(image_path)
+
+
+
+
+
+
 
 
     def show_image(self, image_lbl):
@@ -115,6 +132,63 @@ class PhotoManger:
 
 
 
+    def bw(self):
+        self.photo = self.photo.convert("L")
+        self.show_image(self.image_lbl)
+
+
+
+
+
+    def nas(self):
+        self.photo = ImageEnhance.Color(self.photo).enhance(1.5)
+        self.show_image(self.image_lbl)
+
+
+
+
+    def blur(self):
+        self.photo = self.photo.filter(ImageFilter.BLUR)
+        self.show_image(self.image_lbl)
+
+
+
+
+    def contur(self):
+        self.photo = self.photo.filter(ImageFilter.CONTOUR)
+        self.show_image(self.image_lbl)
+
+
+
+
+    def emboss(self):
+        self.photo = self.photo.filter(ImageFilter.EMBOSS )
+        self.show_image(self.image_lbl)
+
+
+
+
+    def sharpen(self):
+        self.photo = self.photo.filter(ImageFilter.SHARPEN)
+        self.show_image(self.image_lbl)
+
+
+
+
+
+
+    def flip(self):
+        self.photo = self.photo.transpose(Image.FLIP_LEFT_RIGHT)
+        self.show_image(self.image_lbl)
+
+
+
+
+
+
+    def rotate(self):
+        self.photo = self.photo.transpose(Image.ROTATE_90)
+        self.show_image(self.image_lbl)
 
 
 
@@ -132,6 +206,7 @@ class PhotoManger:
 
 
 
+<<<<<<< HEAD
 
 filter1 = QPushButton("ч/б")
 filter2 = QPushButton("поворот ліворуч на 90 градусів")
@@ -142,6 +217,16 @@ filter6 = QPushButton("Накладення контурів")
 filter7 = QPushButton("Тиснення")
 filter8 = QPushButton("Ефект нерізкості")
 
+=======
+filter1 = QPushButton("ч/б")
+filter2 = QPushButton("Насичиність")
+filter3 = QPushButton("розмилювання")
+filter4 = QPushButton("контур")
+filter5 = QPushButton("тиснення")
+filter6 = QPushButton("Збільшення різкост")
+filter7 = QPushButton("Віддзеркалення")
+filter8 = QPushButton("Поворот")
+>>>>>>> a9697b5f303dc156832aa94574f3ccb69ac0f47c
 
 main_line = QHBoxLayout()
 
@@ -180,7 +265,13 @@ def open_folder():
     images_list.clear()
 
 
+<<<<<<< HEAD
     images_list.addItems(files)
+=======
+        if i.endswith("png"):
+            images_list.addItem(i)
+    #images_list.addItems(files)
+>>>>>>> a9697b5f303dc156832aa94574f3ccb69ac0f47c
 
 
 
@@ -195,11 +286,17 @@ def show_chosen_image():
 
 images_list.currentRowChanged.connect(show_chosen_image)
 
+filter1.clicked.connect(photo_manager.bw)
 
+filter2.clicked.connect(photo_manager.nas)
 
+filter3.clicked.connect(photo_manager.blur)
 
+filter4.clicked.connect(photo_manager.contur)
 
+filter5.clicked.connect(photo_manager.emboss)
 
+<<<<<<< HEAD
 filter1.clicked.connect(photo_manager.bw)
 filter2.clicked.connect(photo_manager.rotate)
 filter3.clicked.connect(photo_manager.yaskravist)
@@ -224,13 +321,13 @@ filter8.clicked.connect(photo_manager.Unsharp)
 
 
 
+=======
+filter6.clicked.connect(photo_manager.sharpen)
+>>>>>>> a9697b5f303dc156832aa94574f3ccb69ac0f47c
 
+filter7.clicked.connect(photo_manager.flip)
 
-
-
-
-
-
+filter8.clicked.connect(photo_manager.rotate)
 
 
 
