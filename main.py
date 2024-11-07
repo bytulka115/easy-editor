@@ -1,11 +1,38 @@
 import os
 
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageFilter
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import *
 
 app = QApplication([])
 window = QWidget()
+
+
+
+
+app.setStyleSheet("""
+        QWidget {
+            background: #01a049;
+        }
+        
+        QPushButton
+        {
+            background: #95c2d5;
+            border-style: outset;
+            font-family: Roboto;
+            min_widh: 6em;
+            padding: 6px;
+            
+        }
+    
+    """)
+
+
+
+
+
+
+
 
 
 
@@ -53,6 +80,37 @@ class PhotoManger:
         pixels = pixels.scaledToWidth(500)
         image_lbl.setPixmap(pixels)
 
+    def bw(self):
+        self.photo = self.photo.convert("L")
+        self.show_image(self.image_lbl)
+
+    def rotate(self):
+        self.photo = self.photo.transpose(Image.ROTATE_90)
+        self.show_image(self.image_lbl)
+
+    def yaskravist(self):
+        self.photo = ImageEnhance.Brightness(self.photo).enhance(1.5)
+        self.show_image(self.image_lbl)
+
+    def kontrastnist(self):
+        self.photo =  ImageEnhance.Contrast(self.photo).enhance(1.5)
+        self.show_image(self.image_lbl)
+
+    def blur(self):
+        self.photo = self.photo.filter(ImageFilter.BLUR)
+        self.show_image(self.image_lbl)
+
+    def contur(self):
+        self.photo = self.photo.filter(ImageFilter.CONTOUR)
+        self.show_image(self.image_lbl)
+
+    def emboss(self):
+        self.photo = self.photo.filter(ImageFilter.EMBOSS )
+        self.show_image(self.image_lbl)
+
+    def Unsharp (self):
+        self.photo = self.photo.filter(ImageFilter.UnsharpMask(radius=2, percent=150, threshold=3))
+        self.show_image(self.image_lbl)
 
 
 
@@ -66,11 +124,24 @@ class PhotoManger:
 
 
 
-filter1 = QPushButton("фільтер1")
-filter2 = QPushButton("фільтер2")
-filter3 = QPushButton("фільтер3")
-filter4 = QPushButton("фільтер4")
-filter5 = QPushButton("фільтер5")
+
+
+
+
+
+
+
+
+
+filter1 = QPushButton("ч/б")
+filter2 = QPushButton("поворот ліворуч на 90 градусів")
+filter3 = QPushButton("збільшення яскравості на 50%")
+filter4 = QPushButton("збільшення контрастності на 50%")
+filter5 = QPushButton("Розмивання")
+filter6 = QPushButton("Накладення контурів")
+filter7 = QPushButton("Тиснення")
+filter8 = QPushButton("Ефект нерізкості")
+
 
 main_line = QHBoxLayout()
 
@@ -86,6 +157,9 @@ v2.addWidget(filter2)
 v2.addWidget(filter3)
 v2.addWidget(filter4)
 v2.addWidget(filter5)
+v2.addWidget(filter6)
+v2.addWidget(filter7)
+v2.addWidget(filter8)
 v3.addLayout(v2)
 
 
@@ -95,7 +169,7 @@ main_line.addLayout(v3)
 
 
 photo_manager = PhotoManger()
-
+photo_manager.image_lbl = image_lbl
 
 
 def open_folder():
@@ -105,10 +179,7 @@ def open_folder():
 
     images_list.clear()
 
-    for i in files:
 
-    if i,endswith("png"):
-        images_list.addItems((i))
     images_list.addItems(files)
 
 
@@ -123,6 +194,30 @@ def show_chosen_image():
 
 
 images_list.currentRowChanged.connect(show_chosen_image)
+
+
+
+
+
+
+filter1.clicked.connect(photo_manager.bw)
+filter2.clicked.connect(photo_manager.rotate)
+filter3.clicked.connect(photo_manager.yaskravist)
+filter4.clicked.connect(photo_manager.kontrastnist)
+filter5.clicked.connect(photo_manager.blur)
+filter6.clicked.connect(photo_manager.contur)
+filter7.clicked.connect(photo_manager.emboss)
+filter8.clicked.connect(photo_manager.Unsharp)
+
+
+
+
+
+
+
+
+
+
 
 
 
