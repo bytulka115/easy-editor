@@ -206,7 +206,7 @@ class PhotoManger:
 
 
 
-<<<<<<< HEAD
+
 
 filter1 = QPushButton("ч/б")
 filter2 = QPushButton("поворот ліворуч на 90 градусів")
@@ -217,16 +217,7 @@ filter6 = QPushButton("Накладення контурів")
 filter7 = QPushButton("Тиснення")
 filter8 = QPushButton("Ефект нерізкості")
 
-=======
-filter1 = QPushButton("ч/б")
-filter2 = QPushButton("Насичиність")
-filter3 = QPushButton("розмилювання")
-filter4 = QPushButton("контур")
-filter5 = QPushButton("тиснення")
-filter6 = QPushButton("Збільшення різкост")
-filter7 = QPushButton("Віддзеркалення")
-filter8 = QPushButton("Поворот")
->>>>>>> a9697b5f303dc156832aa94574f3ccb69ac0f47c
+
 
 main_line = QHBoxLayout()
 
@@ -265,13 +256,9 @@ def open_folder():
     images_list.clear()
 
 
-<<<<<<< HEAD
+
     images_list.addItems(files)
-=======
-        if i.endswith("png"):
-            images_list.addItem(i)
-    #images_list.addItems(files)
->>>>>>> a9697b5f303dc156832aa94574f3ccb69ac0f47c
+
 
 
 
@@ -286,17 +273,7 @@ def show_chosen_image():
 
 images_list.currentRowChanged.connect(show_chosen_image)
 
-filter1.clicked.connect(photo_manager.bw)
 
-filter2.clicked.connect(photo_manager.nas)
-
-filter3.clicked.connect(photo_manager.blur)
-
-filter4.clicked.connect(photo_manager.contur)
-
-filter5.clicked.connect(photo_manager.emboss)
-
-<<<<<<< HEAD
 filter1.clicked.connect(photo_manager.bw)
 filter2.clicked.connect(photo_manager.rotate)
 filter3.clicked.connect(photo_manager.yaskravist)
@@ -321,13 +298,7 @@ filter8.clicked.connect(photo_manager.Unsharp)
 
 
 
-=======
-filter6.clicked.connect(photo_manager.sharpen)
->>>>>>> a9697b5f303dc156832aa94574f3ccb69ac0f47c
 
-filter7.clicked.connect(photo_manager.flip)
-
-filter8.clicked.connect(photo_manager.rotate)
 
 
 
