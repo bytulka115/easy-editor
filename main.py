@@ -12,20 +12,25 @@ window = QWidget()
 
 app.setStyleSheet("""
         QWidget {
-            background: #01a049;
+            background: black;
         }
         
         QPushButton
         {
-            background: #95c2d5;
+            background: #46ff6a;
             border-style: outset;
             font-family: Roboto;
             min_widh: 6em;
             padding: 6px;
             
         }
+        
+        
+        
+        
     
     """)
+
 
 
 
